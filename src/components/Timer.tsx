@@ -49,9 +49,9 @@ const Timer: React.FC<TimerProps> = ({ duration, onTimeUp, isActive }) => {
       </div>
       
       {/* Circular progress indicator */}
-      <div className="ml-2 relative h-1.5 bg-gray-200 rounded-full w-10">
+      <div className="ml-2 relative h-1.5 bg-gray-200 rounded-full w-20">
         <div 
-          className="absolute top-0 left-0 h-full bg-amber-500 rounded-full transition-all" 
+          className="absolute top-0 left-0 h-full bg-amber-500 rounded-full transition-all duration-300 ease-linear" 
           style={{ width: `${progress}%` }}
         />
       </div>

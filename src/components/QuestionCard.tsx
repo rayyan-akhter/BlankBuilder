@@ -145,11 +145,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       </div>
       
       {/* Progress bar */}
-      <div className="flex gap-1 mb-8">
+      <div className="flex gap-1 mb-6">
         {progressIndicators.map((status, index) => (
           <div 
             key={index}
-            className={`h-1 flex-1 rounded-full ${
+            className={`h-1.5 flex-1 rounded-full ${
               status === 'completed' ? 'bg-amber-500' : 
               status === 'current' ? 'bg-amber-500' : 'bg-gray-200'
             }`}
@@ -157,8 +157,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         ))}
       </div>
       
-      <h2 className="text-gray-600 text-center mb-8">
-        Select the missing words in the correct order
+      <h2 className="text-gray-600 text-center mb-6">
+        Fill in the blanks with the correct words
       </h2>
       
       <SentenceDisplay 
@@ -167,7 +167,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         onBlankClick={handleBlankClick}
       />
       
-      <div className="flex flex-wrap gap-2 justify-center mb-8">
+      <div className="flex flex-wrap gap-3 justify-center mb-8">
         {question.options.map((word, index) => (
           <Word
             key={index}
@@ -182,9 +182,12 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         <Button 
           onClick={handleNext}
           disabled={!allBlanksFilled}
-          className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200"
+          className={`${allBlanksFilled 
+            ? 'bg-indigo-600 hover:bg-indigo-700 text-white' 
+            : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
         >
-          <ArrowRight className="w-5 h-5" />
+          <span className="mr-2">Next</span>
+          <ArrowRight className="w-4 h-4" />
         </Button>
       </div>
     </div>

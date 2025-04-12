@@ -54,9 +54,13 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
             </div>
             
             <p className="text-gray-600 text-center max-w-md mb-6">
-              While you correctly formed several sentences, there are a couple of areas where
-              improvement is needed. Pay close attention to sentence structure and word placement
-              to ensure clarity and correctness. Review your responses below for more details.
+              {scorePercentage >= 80 ? (
+                "Excellent work! You've demonstrated a strong grasp of sentence construction. Keep up the good work!"
+              ) : scorePercentage >= 60 ? (
+                "Good job! While you correctly formed several sentences, there are a few areas where improvement is needed. Review your responses below."
+              ) : (
+                "While you made some progress, there are several areas where improvement is needed. Pay close attention to sentence structure and word placement."
+              )}
             </p>
             
             <Button 
@@ -78,23 +82,16 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
               return (
                 <div key={question.id} className="border-t pt-6">
                   <div className="flex justify-between mb-2">
-                    <h3 className="text-gray-500">Prompt</h3>
-                    <span className="text-gray-500 text-sm">{index + 1}/{totalQuestions}</span>
+                    <h3 className="text-gray-500">Question {index + 1}</h3>
+                    <span className={`text-sm font-medium px-2 py-0.5 rounded-full ${
+                      answer.isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    }`}>
+                      {answer.isCorrect ? 'Correct' : 'Incorrect'}
+                    </span>
                   </div>
                   
-                  <p className="text-gray-800 mb-4">
-                    {getSentenceWithBlanks(question.sentence)}
-                  </p>
-                  
                   <div className="mb-4">
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Your response:</span>
-                      <span className={`text-sm font-medium px-2 py-0.5 rounded-full ${
-                        answer.isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                      }`}>
-                        {answer.isCorrect ? 'Correct' : 'Incorrect'}
-                      </span>
-                    </div>
+                    <div className="text-gray-500 mb-1">Your response:</div>
                     <p className="text-gray-800">
                       {getSentenceWithAnswers(question.sentence, answer.userAnswers)}
                     </p>
@@ -102,7 +99,7 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
                   
                   {!answer.isCorrect && (
                     <div>
-                      <div className="text-gray-500">Correct:</div>
+                      <div className="text-gray-500 mb-1">Correct answer:</div>
                       <p className="text-gray-800">
                         {getSentenceWithAnswers(question.sentence, question.correctAnswers)}
                       </p>
@@ -116,22 +113,6 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
       </div>
     </div>
   );
-};
-
-// Helper to render sentence with highlighted blanks
-const getSentenceWithBlanks = (sentence: string) => {
-  const parts = sentence.split('_____________');
-  let result = '';
-  
-  parts.forEach((part, index) => {
-    result += part;
-    
-    if (index < parts.length - 1) {
-      result += '_______';
-    }
-  });
-  
-  return result;
 };
 
 // Helper to render sentence with highlighted answers

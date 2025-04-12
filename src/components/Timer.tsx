@@ -11,7 +11,7 @@ const Timer: React.FC<TimerProps> = ({ duration, onTimeUp, isActive }) => {
   const [timeLeft, setTimeLeft] = useState(duration);
   
   useEffect(() => {
-    // Reset timer when question changes
+    // Reset timer when question changes or when isActive changes
     setTimeLeft(duration);
   }, [duration, isActive]);
 
@@ -39,11 +39,22 @@ const Timer: React.FC<TimerProps> = ({ duration, onTimeUp, isActive }) => {
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
+  // Calculate progress percentage
   const progress = (timeLeft / duration) * 100;
 
   return (
-    <div className="text-2xl font-medium">
-      {formatTime(timeLeft)}
+    <div className="flex items-center">
+      <div className="text-xl font-medium">
+        {formatTime(timeLeft)}
+      </div>
+      
+      {/* Circular progress indicator */}
+      <div className="ml-2 relative h-1.5 bg-gray-200 rounded-full w-10">
+        <div 
+          className="absolute top-0 left-0 h-full bg-amber-500 rounded-full transition-all" 
+          style={{ width: `${progress}%` }}
+        />
+      </div>
     </div>
   );
 };

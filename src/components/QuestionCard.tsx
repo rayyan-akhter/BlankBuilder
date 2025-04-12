@@ -22,8 +22,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   onSubmit,
   onQuit,
 }) => {
-  // Count how many blanks are in the sentence
-  const blankCount = (question.sentence.match(/___/g) || []).length;
+  // Split the sentence by blank placeholders (___)
+  const parts = question.sentence.split('___');
+  const blankCount = parts.length - 1;
   
   // Initialize filledAnswers with nulls equal to the number of blanks
   const [filledAnswers, setFilledAnswers] = useState<(string | null)[]>(
@@ -34,11 +35,15 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   const [selectedOptions, setSelectedOptions] = useState<boolean[]>(
     Array(question.options.length).fill(false)
   );
+  
+  // Track if timer is active
+  const [isTimerActive, setIsTimerActive] = useState(true);
 
   // Reset state when question changes
   useEffect(() => {
     setFilledAnswers(Array(blankCount).fill(null));
     setSelectedOptions(Array(question.options.length).fill(false));
+    setIsTimerActive(true);
   }, [question, blankCount]);
 
   // Handle clicking on a word option
@@ -96,14 +101,15 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
   // Handle timer completion
   const handleTimeUp = () => {
+    setIsTimerActive(false);
     // If all blanks aren't filled, auto-submit whatever is filled
-    if (!allBlanksFilled) {
-      onSubmit(filledAnswers.map(answer => answer || ""));
-    }
+    const answers = filledAnswers.map(answer => answer || "");
+    onSubmit(answers);
   };
 
   // Handle next button click
   const handleNext = () => {
+    setIsTimerActive(false);
     // Convert null values to empty strings to avoid issues
     const answers = filledAnswers.map(answer => answer || "");
     onSubmit(answers);
@@ -122,7 +128,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   return (
     <div className="bg-white rounded-xl shadow-md p-6 max-w-3xl w-full mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <div className="text-xl font-medium">0:15</div>
+        <Timer 
+          duration={30} 
+          onTimeUp={handleTimeUp}
+          isActive={isTimerActive}
+        />
         
         <Button 
           variant="outline"

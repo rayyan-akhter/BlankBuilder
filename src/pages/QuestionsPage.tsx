@@ -59,17 +59,17 @@ const QuestionsPage = () => {
           answers={answers}
           questions={answers.map(answer => {
             // Find the corresponding question for this answer
-            const question = currentQuestion ? {
-              id: answer.questionId,
-              sentence: currentQuestion.sentence,
-              options: currentQuestion.options,
-              correctAnswers: currentQuestion.correctAnswers,
-            } : {
+            const foundQuestion = Array.isArray(currentQuestion) 
+              ? currentQuestion.find(q => q.id === answer.questionId)
+              : null;
+              
+            const question = foundQuestion || {
               id: answer.questionId,
               sentence: "",
               options: [],
               correctAnswers: [],
             };
+            
             return question;
           })}
           onRestart={resetQuiz}

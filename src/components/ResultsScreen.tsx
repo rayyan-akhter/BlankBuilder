@@ -86,7 +86,7 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
                     {getSentenceWithBlanks(question.sentence)}
                   </p>
                   
-                  <div className="mb-2">
+                  <div className="mb-4">
                     <div className="flex justify-between">
                       <span className="text-gray-500">Your response:</span>
                       <span className={`text-sm font-medium px-2 py-0.5 rounded-full ${
@@ -120,7 +120,7 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
 
 // Helper to render sentence with highlighted blanks
 const getSentenceWithBlanks = (sentence: string) => {
-  const parts = sentence.split('___');
+  const parts = sentence.split('_____________');
   let result = '';
   
   parts.forEach((part, index) => {
@@ -139,7 +139,7 @@ const getSentenceWithAnswers = (
   sentence: string, 
   userAnswers: string[]
 ) => {
-  const parts = sentence.split('___');
+  const parts = sentence.split('_____________');
   let result = '';
   
   parts.forEach((part, index) => {

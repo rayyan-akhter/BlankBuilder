@@ -5,12 +5,14 @@ import Word from './Word';
 import SentenceDisplay from './SentenceDisplay';
 import Timer from './Timer';
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 interface QuestionCardProps {
   question: Question;
   questionNumber: number;
   totalQuestions: number;
   onSubmit: (answers: string[]) => void;
+  onQuit?: () => void;
 }
 
 const QuestionCard: React.FC<QuestionCardProps> = ({
@@ -18,6 +20,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   questionNumber,
   totalQuestions,
   onSubmit,
+  onQuit,
 }) => {
   // Count how many blanks are in the sentence
   const blankCount = (question.sentence.match(/___/g) || []).length;
@@ -106,19 +109,47 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
     onSubmit(answers);
   };
 
+  // Create a progress indicator showing which question we're on
+  const progressIndicators = Array(totalQuestions).fill(0).map((_, index) => {
+    if (index < questionNumber - 1) {
+      return "completed"; // Questions before current
+    } else if (index === questionNumber - 1) {
+      return "current"; // Current question
+    }
+    return "upcoming"; // Questions after current
+  });
+
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 max-w-3xl w-full mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-800">
-          Question {questionNumber} of {totalQuestions}
-        </h2>
+    <div className="bg-white rounded-xl shadow-md p-6 max-w-3xl w-full mx-auto">
+      <div className="flex justify-between items-center mb-4">
+        <div className="text-xl font-medium">0:15</div>
+        
+        <Button 
+          variant="outline"
+          size="sm"
+          onClick={onQuit}
+          className="text-gray-600"
+        >
+          Quit
+        </Button>
       </div>
       
-      <Timer 
-        duration={30} 
-        onTimeUp={handleTimeUp} 
-        isActive={true}
-      />
+      {/* Progress bar */}
+      <div className="flex gap-1 mb-8">
+        {progressIndicators.map((status, index) => (
+          <div 
+            key={index}
+            className={`h-1 flex-1 rounded-full ${
+              status === 'completed' ? 'bg-amber-500' : 
+              status === 'current' ? 'bg-amber-500' : 'bg-gray-200'
+            }`}
+          />
+        ))}
+      </div>
+      
+      <h2 className="text-gray-600 text-center mb-8">
+        Select the missing words in the correct order
+      </h2>
       
       <SentenceDisplay 
         sentence={question.sentence}
@@ -126,7 +157,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         onBlankClick={handleBlankClick}
       />
       
-      <div className="grid grid-cols-2 gap-4 mb-8">
+      <div className="flex flex-wrap gap-2 justify-center mb-8">
         {question.options.map((word, index) => (
           <Word
             key={index}
@@ -141,9 +172,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         <Button 
           onClick={handleNext}
           disabled={!allBlanksFilled}
-          className="bg-blue hover:bg-blue-dark text-white font-medium py-2 px-6 rounded-lg transition-colors"
+          className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200"
         >
-          Next
+          <ArrowRight className="w-5 h-5" />
         </Button>
       </div>
     </div>

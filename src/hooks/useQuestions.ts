@@ -173,6 +173,7 @@ export const useQuestions = () => {
 
   return {
     currentQuestion: state.questions[state.currentQuestionIndex],
+    questions: state.questions, // Expose the questions array
     currentQuestionIndex: state.currentQuestionIndex,
     totalQuestions: state.questions.length,
     answers: state.answers,

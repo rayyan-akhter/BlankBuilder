@@ -22,7 +22,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   onQuit,
 }) => {
   // Split the sentence by blank placeholders (___)
-  const parts = question.sentence.split("___");
+  const parts = question.sentence.split("_____________");;
   const blankCount = parts.length - 1;
 
   // Initialize filledAnswers with nulls equal to the number of blanks
@@ -107,7 +107,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   };
 
   // Check if all blanks are filled
-  const allBlanksFilled = filledAnswers.every((answer) => answer !== null);
+  const allBlanksFilled = filledAnswers.every(
+    (answer) => typeof answer === "string" && answer.trim().length > 0
+  );
 
   // Handle timer completion
   const handleTimeUp = () => {
@@ -192,7 +194,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       <div className="flex justify-end">
         <Button
           onClick={handleNext}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white rounded aspect-square p-0 h-12 w-12 flex items-center justify-center"
+          disabled={!allBlanksFilled}
+          className={`bg-indigo-600 hover:bg-indigo-700 text-white rounded aspect-square p-0 h-12 w-12 flex items-center justify-center  disabled:opacity-50 disabled:cursor-not`}
         >
           <ArrowRight className="w-5 h-5" />
         </Button>

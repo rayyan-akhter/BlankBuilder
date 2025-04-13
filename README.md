@@ -80,7 +80,7 @@ Follow these steps to set up the project locally:
 git clone <REPOSITORY_URL>
 
 # Navigate to the project directory
-cd word-flow-builder
+cd FillTheGap
 
 # Install dependencies
 npm install
@@ -105,6 +105,6 @@ The quiz can be customized by modifying the question data in `src/hooks/useQuest
 ```
 
 ## Deployment
-
+url : https://fillthegap.netlify.app/
 
 

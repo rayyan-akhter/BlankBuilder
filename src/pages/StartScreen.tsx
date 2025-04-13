@@ -2,9 +2,12 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { FileText } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const StartScreen = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const coins = location.state?.coins || 0;
 
   const handleStart = () => {
     navigate("/questions");
@@ -50,7 +53,7 @@ const StartScreen = () => {
             <h3 className="text-sm font-medium text-gray-500 mb-1">Coins</h3>
             <p className="text-lg font-medium flex items-center justify-center">
               <span className="w-4 h-4 bg-yellow-400 border border-yellow-500 rounded-full inline-block mr-1 animate-flipCoin"></span>{" "}
-              0
+              {coins}
             </p>
           </div>
         </div>

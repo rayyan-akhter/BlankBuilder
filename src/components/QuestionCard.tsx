@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Question } from '@/types';
 import Word from './Word';
@@ -181,10 +180,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       <div className="flex justify-end">
         <Button 
           onClick={handleNext}
-          disabled={!allBlanksFilled}
-          className={`${allBlanksFilled 
-            ? 'bg-indigo-600 hover:bg-indigo-700 text-white' 
-            : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white"
         >
           <span className="mr-2">Next</span>
           <ArrowRight className="w-4 h-4" />

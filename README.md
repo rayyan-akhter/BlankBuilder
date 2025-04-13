@@ -105,6 +105,6 @@ The quiz can be customized by modifying the question data in `src/hooks/useQuest
 ```
 
 ## Deployment
-url : https://fillthegap.netlify.app/
+url : https://blankbuilder.netlify.app/
 
 

@@ -9,6 +9,7 @@ const QuestionsPage = () => {
   const navigate = useNavigate();
   const {
     currentQuestion,
+    questions,
     currentQuestionIndex,
     totalQuestions,
     answers,
@@ -57,21 +58,7 @@ const QuestionsPage = () => {
       {isFinished ? (
         <ResultsScreen 
           answers={answers}
-          questions={answers.map(answer => {
-            // Find the corresponding question for this answer
-            const foundQuestion = Array.isArray(currentQuestion) 
-              ? currentQuestion.find(q => q.id === answer.questionId)
-              : null;
-              
-            const question = foundQuestion || {
-              id: answer.questionId,
-              sentence: "",
-              options: [],
-              correctAnswers: [],
-            };
-            
-            return question;
-          })}
+          questions={questions}
           onRestart={resetQuiz}
         />
       ) : (

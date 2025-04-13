@@ -2,7 +2,7 @@
 import React from 'react';
 import { Answer, Question } from '@/types';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, LayoutDashboard, Check, X } from 'lucide-react';
+import { ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface ResultsScreenProps {
@@ -55,7 +55,7 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
             
             <p className="text-gray-600 text-center max-w-md mb-6">
               {scorePercentage >= 80 ? (
-                "Excellent work! You've demonstrated a strong grasp of sentence construction. Keep up the good work!"
+                "While you correctly formed several sentences, there are a couple of areas where improvement is needed. Pay close attention to sentence structure and word placement to ensure clarity and correctness. Review your responses below for more details."
               ) : scorePercentage >= 60 ? (
                 "Good job! While you correctly formed several sentences, there are a few areas where improvement is needed. Review your responses below."
               ) : (
@@ -67,7 +67,6 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
               onClick={handleGoToDashboard}
               className="bg-indigo-600 hover:bg-indigo-700"
             >
-              <LayoutDashboard className="w-4 h-4 mr-2" />
               Go to Dashboard
             </Button>
           </div>
@@ -83,11 +82,13 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
                 <div key={question.id} className="border-t pt-6">
                   <div className="flex justify-between mb-2">
                     <h3 className="text-gray-500">Question {index + 1}</h3>
-                    <span className={`text-sm font-medium px-2 py-0.5 rounded-full ${
-                      answer.isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                    }`}>
-                      {answer.isCorrect ? 'Correct' : 'Incorrect'}
-                    </span>
+                    <div className="text-sm px-2 py-0.5 rounded-full flex items-center">
+                      <span className={`text-sm font-medium px-2 py-0.5 rounded-full ${
+                        answer.isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {answer.isCorrect ? 'Correct' : 'Incorrect'}
+                      </span>
+                    </div>
                   </div>
                   
                   <div className="mb-4">

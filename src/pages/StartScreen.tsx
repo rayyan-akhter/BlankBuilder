@@ -49,7 +49,7 @@ const StartScreen = () => {
           <div className="bg-gray-50 p-4 text-center border-r-2 flex flex-col gap-3">
             <h3 className="text-sm font-medium text-gray-500 mb-1">Coins</h3>
             <p className="text-lg font-medium flex items-center justify-center">
-              <span className="w-4 h-4 bg-yellow-400 rounded-full inline-block mr-1"></span>{" "}
+              <span className="w-4 h-4 bg-yellow-400 border border-yellow-500 rounded-full inline-block mr-1 animate-flipCoin"></span>{" "}
               0
             </p>
           </div>

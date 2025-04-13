@@ -103,12 +103,20 @@ export default {
 				'pulse-light': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.7' }
-				}
+				},
+				flipCoin: {
+					'0%': { transform: 'rotateY(0deg)' },
+					'50%': { transform: 'rotateY(180deg)' },
+					'100%': { transform: 'rotateY(360deg)' },
+				  },
+		  
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'pulse-light': 'pulse-light 1.5s ease-in-out infinite'
+				'pulse-light': 'pulse-light 1.5s ease-in-out infinite',
+				flipCoin: 'flipCoin 2s linear infinite',
+
 			}
 		}
 	},

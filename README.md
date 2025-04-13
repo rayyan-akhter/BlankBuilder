@@ -5,12 +5,6 @@
 
 Word Flow Builder is an interactive educational application designed to help users improve their language skills through sentence construction exercises. Users are presented with incomplete sentences and must select the correct words from provided options to fill in the blanks, enhancing vocabulary, grammar, and language comprehension.
 
-## Live Demo
-
-**URL**: https://lovable.dev/projects/8dd1bde9-9b6a-41ab-8b6b-c16ad9591038
-
-## Features
-
 ### 1. Interactive Quiz Format
 - 10 carefully crafted questions that test sentence construction skills
 - Multiple blanks per sentence that must be filled with the correct words
@@ -112,27 +106,5 @@ The quiz can be customized by modifying the question data in `src/hooks/useQuest
 
 ## Deployment
 
-This project is deployed using Lovable's hosting service. You can deploy your own version by following these steps:
 
-1. Open the project in [Lovable](https://lovable.dev/projects/8dd1bde9-9b6a-41ab-8b6b-c16ad9591038)
-2. Click on Share -> Publish
-3. Your application will be available at the provided URL
 
-## Custom Domain
-
-To connect a custom domain to your Lovable project:
-1. Navigate to Project > Settings > Domains
-2. Click Connect Domain
-3. Follow the step-by-step guide in the [Lovable documentation](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-
-## Contributing
-
-Contributions to improve the application are welcome. Please feel free to submit pull requests or open issues to suggest enhancements or report bugs.
-
-## License
-
-This project is available for use under standard licensing terms.
-
----
-
-Created with [Lovable](https://lovable.dev) - AI-powered web application development.
